@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Beautiflie</title>
+      <title>Cosmetics</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -32,6 +32,26 @@
       <link rel="stylesheet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+      <style>
+        /* Login Button Styles */
+.login_btn {
+   background-color: black; /* aw pink #f8477f;*/
+   color: white;
+   border: none;
+   padding: 8px 20px;
+   border-radius: 5px;
+   font-weight: 600;
+   transition: background-color 0.3s ease;
+   margin-left: 5px;
+   margin-right: 10px;
+}
+.login_btn:hover {
+   background-color: #f5ddb6 ;
+    /* Darker shade for pink #d93968*/
+   text-decoration: none;
+   color: white;
+}
+      </style>
    </head>
    <body>
       <!-- header section start -->
@@ -47,14 +67,16 @@
                   <a href="contact.html">Contact</a>
                </div>
                <span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>
-               <a class="logo" href="index.html"><img src="images/logo.png"></a></a>
+               <a class="logo" href="index.html"><img src="images/logo.png"></a>
                <form class="form-inline ">
                   <div class="login_text">
                      <ul>
-                        <li><a href="#"><img src="images/user-icon.png"></a></li>
+                        <!-- <li><a href="#"><img src="images/user-icon.png"></a></li> -->
+                        <li><a href="login.html" class="login_btn">Login</a></li>
                         <li><a href="#"><img src="images/bag-icon.png"></a></li>
                         <li><a href="#"><img src="images/search-icon.png"></a></li>
                      </ul>
+                  </div>
                   </div>
                </form>
             </nav>
