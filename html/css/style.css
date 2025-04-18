@@ -395,6 +395,8 @@ button {
     padding: 20px 0;
     background-color: #fef4ec;
     text-align: center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 .search_bar {
@@ -444,6 +446,8 @@ button {
     float: left;
     background-color: #fef4ec;
     padding: 30px 0;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .filter_title {
@@ -501,7 +505,7 @@ button {
 }
 
 .filter_apply_button {
-    width: 100%;
+    width: 30%;
     padding: 12px 20px;
     background-color: #252525;
     color: #fff;
@@ -557,6 +561,7 @@ button {
     background-color: #ffffff;
     height: auto;
     border: 1px solid #7d7d7c;
+    border-radius: 20px;
     padding: 20px 0px 0px 0px;
     margin-top: 30px;
 }
@@ -591,6 +596,8 @@ button {
     background-color: #000;
     height: auto;
     padding: 20px 10px 13px 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .buy_bt {
