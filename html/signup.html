@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Beautifilie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <!-- Tweaks for older IEs-->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    body {
+      background: #fef4ec;
+      min-height: 100vh;
+    }
+
+    /* Navbar styles */
+    .header_section {
+      width: 100%;
+      background-color: #ffffff;
+    }
+
+    .navbar {
+      padding: 15px 0;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    .toggle_icon {
+      cursor: pointer;
+    }
+
+    .login_text ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    .login_text li {
+      float: left;
+      font-size: 16px;
+      color: #ffffff;
+      padding: 0px 20px;
+      list-style: none;
+    }
+
+   
+    
+
+    .login_btn:hover {
+      background-color: #f5ddb6;
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Signup form styles */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+      padding-bottom: 80px;
+    }
+
+    .signup-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .signup-button {
+      width: 100%;
+      padding: 12px;
+      background-color: black;
+      border: none;
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .signup-button:hover {
+      background-color: #f5ddb6 ;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    .login-link a {
+      color: #ff69b4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .terms-checkbox input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- header section start -->
+  <div class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="client.html">Client</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>
+        <a class="logo" href="index.html"><img src="images/logo.png"></a>
+        <form class="form-inline">
+          <div class="login_text">
+            <ul>
+              <!-- <li><a href="login.html" class="login_btn">Login</a></li> -->
+              <li><a href="#"><img src="images/bag-icon.png"></a></li>
+              <li><a href="#"><img src="images/search-icon.png"></a></li>
+            </ul>
+          </div>
+        </form>
+      </nav>
+    </div>
+  </div>
+  <!-- header section end -->
+
+  <div class="container">
+    <div class="signup-container">
+      <h2>Create Account</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="yourname@gmail.com" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" placeholder="••••••••" required />
+        </div>
+        <div class="terms-checkbox">
+          <input type="checkbox" id="terms" required />
+          <label for="terms">I agree to the Terms and Privacy Policy</label>
+        </div>
+        <button type="submit" class="signup-button">Create Account</button>
+      </form>
+      <div class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Javascript files-->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+</body>
+</html>
