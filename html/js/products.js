@@ -29,7 +29,7 @@ const products = [
                     <div class="btn_main">
                         <div class="buy_bt">
                             <ul>
-                                <li><a href="#">Buy Now</a></li>
+                                <li><a href="#" onclick="handleBuyClick('${product.title}')">Buy Now</a></li>
                             </ul>
                         </div>
                         <h3 class="price_text">Price ${product.price}</h3>
