@@ -413,12 +413,11 @@
         function openNav() {
             document.getElementById("mySidenav").style.width = "100%";
         }
-
+    
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
-
-       
+    
         // Logout function
         function logout() {
             localStorage.removeItem('isAdmin');
@@ -427,78 +426,71 @@
             alert('Logged out successfully.');
             window.location.href = 'login.html';
         }
-
-        // Products array
-        let products = [
-            { id: 1, name: "Beauty Brush", description: "A premium makeup brush", image: "images/img-1.png", price: 30, stock: 20 },
-            { id: 2, name: "Hair Comb", description: "Smooth and sleek comb", image: "images/img-2.png", price: 25, stock: 20 },
-            { id: 3, name: "Makeup Kit", description: "Complete cosmetic kit", image: "images/img-3.png", price: 50, stock: 20 },
-            { id: 4, name: "Nail Polish", description: "Glossy finish", image: "images/img-4.png", price: 10, stock: 20 },
-            { id: 5, name: "Face Cream", description: "Moisturizing cream", image: "images/img-5.png", price: 40, stock: 20 },
-            { id: 6, name: "Perfume", description: "Long-lasting fragrance", image: "images/img-6.png", price: 60, stock: 20 },
-            { id: 7, name: "Lipstick", description: "Vibrant shades", image: "images/img-7.png", price: 15, stock: 20 },
-            { id: 8, name: "Eyeliner", description: "Smooth application", image: "images/img-8.png", price: 18, stock: 20 },
-            { id: 9, name: "Blush", description: "Natural color", image: "images/img-9.png", price: 22, stock: 20 },
-            { id: 10, name: "Foundation", description: "Even skin tone", image: "images/img-10.png", price: 45, stock: 20 },
-            { id: 11, name: "Concealer", description: "Covers imperfections", image: "images/img-11.png", price: 35, stock: 20 },
-            { id: 12, name: "Highlighter", description: "Radiant glow", image: "images/img-12.png", price: 28, stock: 20 }
-        ];
-
-        let orders = [
-            { id: 'ORD001', customer: 'Jane Doe', products: ['Lipstick'], total: 19.99, status: 'Pending' },
-            { id: 'ORD002', customer: 'John Smith', products: ['Eyeshadow Palette'], total: 29.99, status: 'Shipped' }
-        ];
-
+    
         // Product Management
-        function addProduct(e) {
+        async function addProduct(e) {
             e.preventDefault();
-            const id = document.getElementById('productId').value ? parseInt(document.getElementById('productId').value) : null;
+            const id = document.getElementById('productId').value;
             const name = document.getElementById('productName').value;
             const description = document.getElementById('productDescription').value;
             const price = parseFloat(document.getElementById('productPrice').value);
             const image = document.getElementById('productImage').value;
             const stock = parseInt(document.getElementById('productStock').value);
-
+    
+            const product = { name, description, price, image, stock };
+    
             if (id) {
-                // Update existing product
-                const index = products.findIndex(p => p.id === id);
-                products[index] = { id, name, description, price, image, stock };
-                alert('Product updated successfully!');
+                // Update: You need a PUT route in your backend for this to work
+                const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+                if (res.ok) alert('Product updated successfully!');
             } else {
-                // Add new product
-                const product = { id: products.length + 1, name, description, price, image, stock };
-                products.push(product);
-                alert('Product added successfully!');
+                const res = await fetch('http://localhost:3000/api/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+                if (res.ok) alert('Product added successfully!');
             }
-
+    
             updateProductTable();
             clearProductForm();
         }
-
-        function updateProduct(id) {
+    
+        async function updateProduct(id) {
+            const res = await fetch(`http://localhost:3000/api/products`);
+            const products = await res.json();
             const product = products.find(p => p.id === id);
             document.getElementById('productId').value = product.id;
             document.getElementById('productName').value = product.name;
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productPrice').value = product.price;
-            document.getElementById('productImage').value = product.image;
+            document.getElementById('productImage').value = product.image || '';
             document.getElementById('productStock').value = product.stock;
             document.getElementById('submitButton').textContent = 'Update Product';
         }
-
-        function removeProduct(id) {
-            products = products.filter(p => p.id !== id);
-            updateProductTable();
+    
+        async function removeProduct(id) {
+            await fetch(`http://localhost:3000/api/products/${id}`, {
+                method: 'DELETE'
+            });
             alert('Product removed successfully!');
+            updateProductTable();
         }
-
+    
         function clearProductForm() {
             document.getElementById('productForm').reset();
             document.getElementById('productId').value = '';
             document.getElementById('submitButton').textContent = 'Add Product';
         }
-
-        function updateProductTable() {
+    
+        async function updateProductTable() {
+            const res = await fetch('http://localhost:3000/api/products');
+            const products = await res.json();
+    
             const tableBody = document.getElementById('productTable');
             tableBody.innerHTML = '';
             products.forEach(product => {
@@ -519,8 +511,13 @@
                 tableBody.innerHTML += row;
             });
         }
-
-        // Order Management
+    
+        // Order Management (unchanged – still local)
+        let orders = [
+            { id: 'ORD001', customer: 'Jane Doe', products: ['Lipstick'], total: 19.99, status: 'Pending' },
+            { id: 'ORD002', customer: 'John Smith', products: ['Eyeshadow Palette'], total: 29.99, status: 'Shipped' }
+        ];
+    
         function updateOrderStatus(orderId, status) {
             const order = orders.find(o => o.id === orderId);
             order.status = status;
@@ -531,15 +528,15 @@
                 issueRefund(orderId);
             }
         }
-
+    
         function sendOrderConfirmation(orderId) {
             alert(`Order confirmation sent for Order ${orderId}`);
         }
-
+    
         function issueRefund(orderId) {
             alert(`Refund issued for Order ${orderId}`);
         }
-
+    
         function updateOrderTable() {
             const tableBody = document.getElementById('orderTable');
             tableBody.innerHTML = '';
@@ -564,14 +561,14 @@
                 tableBody.innerHTML += row;
             });
         }
-
+    
         // Initialize tables on page load
-        window.onload = function() {
+        window.onload = function () {
             updateProductTable();
             updateOrderTable();
-            // Attach submit event listener to product form
             document.getElementById('productForm').addEventListener('submit', addProduct);
         };
     </script>
+    
 </body>
 </html>
