@@ -24,6 +24,7 @@ function handleBuyClick(productName) {
     } else {
         cartItems.push({ title, price, image, category, quantity: 1 });
     }
+    updateCartBadge();
 
     saveCartToLocalStorage();
     renderCart();
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Render cart on page load
     renderCart();
+    updateCartBadge();
 });
 
 // Function to render cart items dynamically
@@ -90,7 +92,7 @@ function renderCart() {
         `;
         cartItemsContainer.appendChild(row);
     });
-
+    updateCartBadge();
     addCartEventListeners();
     updateSummary(); // Update the summary after rendering
 }
@@ -109,7 +111,8 @@ function updateSummary() {
     // Update the DOM
     document.getElementById("itemCount").textContent = `ITEMS ${itemCount}`;
     document.getElementById("subtotalPrice").textContent = `€ ${totalPrice.toFixed(2)}`;
-    document.getElementById("totalPrice").textContent = `€ ${(totalPrice + 5).toFixed(2)}`; // Adding shipping cost
+    document.getElementById("totalPrice").textContent = `€ ${(totalPrice + 5).toFixed(2)}`; 
+    updateCartBadge();// Adding shipping cost
 }
 
 // Add event listeners for quantity and remove buttons
@@ -127,6 +130,7 @@ function addCartEventListeners() {
                 qtySpan.textContent = qty - 1;
                 updateCartQuantity(button, qty - 1);
                 saveCartToLocalStorage();
+                updateCartBadge();
             }
         });
     });
@@ -138,6 +142,7 @@ function addCartEventListeners() {
             let qty = parseInt(qtySpan.textContent);
             qtySpan.textContent = qty + 1;
             updateCartQuantity(button, qty + 1);
+            updateCartBadge();
             saveCartToLocalStorage();
         });
     });
@@ -149,6 +154,7 @@ function addCartEventListeners() {
                 cartItems.splice(index, 1); // Remove the item from the cart
                 saveCartToLocalStorage(); // Save updated cart to localStorage
                 renderCart(); // Re-render the cart
+                updateCartBadge();
             } else {
                 console.error("Invalid index for removal:", button.getAttribute('data-index'));
             }
@@ -167,5 +173,16 @@ function updateCartQuantity(button, newQuantity) {
         saveCartToLocalStorage();
         updateSummary();
         renderCart();
+        updateCartBadge();
+    }
+}
+function updateCartBadge() {
+    const cartBadge = document.getElementById("cartBadge");
+    if (cartBadge) {
+        const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        console.log("Updating badge, total quantity:", totalQuantity);
+        cartBadge.textContent = totalQuantity;
+    } else {
+        console.log("cartBadge not found on this page");
     }
 }
