@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard - Cosmetics</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box !important;
+            transition: ease all 0.3s;
+        }
+
+        body {
+            color: #666666;
+            font-size: 14px;
+            line-height: 1.80857;
+            font-weight: normal;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: 0;
+            font-weight: normal;
+            position: relative;
+            padding: 0 0 10px 0;
+            line-height: normal;
+            color: #252525;
+            margin: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        h1 { font-size: 28px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 18px; }
+
+        a {
+            color: #252525;
+            text-decoration: none !important;
+            transition: all .3s ease-in-out;
+        }
+
+        a:hover {
+            color: #f5ddb6;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .layout_padding {
+            padding-top: 90px;
+            padding-bottom: 30px;
+        }
+
+        .dashboard-header {
+            background:#fef4ec;
+            color: #fef4ec;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+
+        .admin-section h2 {
+            font-size: 32px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            color: #252525;
+        }
+
+        .table {
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            font-size: 14px;
+            color: #252525;
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .table th {
+            background-color: #252525;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .table tbody tr:hover {
+            background-color: #fef4ec;
+        }
+
+        .low-stock {
+            color: red;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #252525;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #252525;
+            padding: 12px;
+            background-color: #f8f9fa;
+        }
+
+        .form-control:focus {
+            border-color: #f5ddb6;
+            box-shadow: 0 0 5px rgba(245, 221, 182, 0.5);
+        }
+
+        .btn-primary, .btn-secondary, .btn-danger, .btn-warning {
+            padding: 10px 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #252525;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #f5ddb6;
+            color: #252525;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: #ffffff;
+            color: #252525;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f5ddb6;
+            color: #252525;
+            transform: scale(1.05);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #252525;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            color: #252525;
+            transform: scale(1.05);
+        }
+
+        .logout-btn {
+            margin: 20px auto;
+            width: 150px;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-action {
+            margin-right: 10px;
+            width: auto;
+            min-width: 100px;
+            padding: 8px 15px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            color: #252525;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border 0.3s ease-in-out;
+        }
+
+        select:focus {
+            border-color: #f5ddb6;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- header section start -->
+    <div class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="client.html">Client</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="admin.html">Admin</a>
+                </div>
+                <span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>
+                <a class="logo" href="index.html"><img src="images/logo.png"></a>
+                <form class="form-inline">
+                    <div class="login_text">
+                        <ul>
+                            <li><a href="login.html"><img src="images/user-icon.png"></a></li>
+                            <li>
+                                <div class="cart-container">
+                                    <a href="shoppingCart.html">
+                                        <img src="images/bag-icon.png" alt="Shopping Cart">
+                                        <div class="cart-badge" id="cartBadge">0</div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><a href="products.html"><img src="images/search-icon.png"></a></li>
+                        </ul>
+                    </div>
+                </form>
+            </nav>
+        </div>
+    </div>
+    <!-- header section end -->
+
+    <!-- admin section start -->
+    <div class="container layout_padding">
+        <div class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+        </div>
+
+        <!-- Product Catalog Management -->
+        <div class="admin-section">
+            <h2>Product Catalog Management</h2>
+            <form id="productForm" class="mb-4">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" class="form-control" id="productName" required>
+              </div>
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea class="form-control" id="productDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Price ($)</label>
+                    <input type="number" class="form-control" id="productPrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="productImage">Image URL</label>
+                    <input type="text" class="form-control" id="productImage" required>
+                </div>
+                <div class="form-group">
+                    <label for="productStock">Stock Quantity</label>
+                    <input type="number" class="form-control" id="productStock" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="submitButton">Add Product</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearProductForm()">Clear</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Existing Products -->
+        <div class="admin-section">
+            <h2>Existing Products</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock Level</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <!-- Products will be injected here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Order Management -->
+        <div class="admin-section">
+            <h2>Order Management</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Products</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="orderTable">
+                    <!-- Orders will be injected here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <button class="btn btn-danger logout-btn" onclick="logout()">Logout</button>
+    </div>
+    <!-- admin section end -->
+
+    <!-- footer section start -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="footer_logo"><a href="index.html"><img src="images/footer-logo.png"></a></div>
+            <div class="contact_section_2">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3 class="address_text">Contact Us</h3>
+                        <div class="address_bt">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="padding_left10">Address : Loram Ipusm</span></a></li>
+                                <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left10">Call : +01 1234567890</span></a></li>
+                                <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left10">Email : demo@gmail.com</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="footer_logo_1"><a href="index.html"><img src="images/footer-logo.png"></a></div>
+                        <p class="dummy_text">commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="main">
+                            <h3 class="address_text">Best Products</h3>
+                            <p class="ipsum_text">dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="social_icon">
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- footer section end -->
+
+    <!-- copyright section start -->
+    <div class="copyright_section">
+        <div class="container">
+            <p class="copyright_text"><a href="https://html.design"></a></p>
+        </div>
+    </div>
+    <!-- copyright section end -->
+
+    <!-- Javascript files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/plugin.js"></script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+       
+        // Logout function
+        function logout() {
+            localStorage.removeItem('isAdmin');
+            localStorage.removeItem('adminUsername');
+            localStorage.removeItem('adminPassword');
+            alert('Logged out successfully.');
+            window.location.href = 'login.html';
+        }
+
+        // Products array
+        let products = [
+            { id: 1, name: "Beauty Brush", description: "A premium makeup brush", image: "images/img-1.png", price: 30, stock: 20 },
+            { id: 2, name: "Hair Comb", description: "Smooth and sleek comb", image: "images/img-2.png", price: 25, stock: 20 },
+            { id: 3, name: "Makeup Kit", description: "Complete cosmetic kit", image: "images/img-3.png", price: 50, stock: 20 },
+            { id: 4, name: "Nail Polish", description: "Glossy finish", image: "images/img-4.png", price: 10, stock: 20 },
+            { id: 5, name: "Face Cream", description: "Moisturizing cream", image: "images/img-5.png", price: 40, stock: 20 },
+            { id: 6, name: "Perfume", description: "Long-lasting fragrance", image: "images/img-6.png", price: 60, stock: 20 },
+            { id: 7, name: "Lipstick", description: "Vibrant shades", image: "images/img-7.png", price: 15, stock: 20 },
+            { id: 8, name: "Eyeliner", description: "Smooth application", image: "images/img-8.png", price: 18, stock: 20 },
+            { id: 9, name: "Blush", description: "Natural color", image: "images/img-9.png", price: 22, stock: 20 },
+            { id: 10, name: "Foundation", description: "Even skin tone", image: "images/img-10.png", price: 45, stock: 20 },
+            { id: 11, name: "Concealer", description: "Covers imperfections", image: "images/img-11.png", price: 35, stock: 20 },
+            { id: 12, name: "Highlighter", description: "Radiant glow", image: "images/img-12.png", price: 28, stock: 20 }
+        ];
+
+        let orders = [
+            { id: 'ORD001', customer: 'Jane Doe', products: ['Lipstick'], total: 19.99, status: 'Pending' },
+            { id: 'ORD002', customer: 'John Smith', products: ['Eyeshadow Palette'], total: 29.99, status: 'Shipped' }
+        ];
+
+        // Product Management
+        function addProduct(e) {
+            e.preventDefault();
+            const id = document.getElementById('productId').value ? parseInt(document.getElementById('productId').value) : null;
+            const name = document.getElementById('productName').value;
+            const description = document.getElementById('productDescription').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const image = document.getElementById('productImage').value;
+            const stock = parseInt(document.getElementById('productStock').value);
+
+            if (id) {
+                // Update existing product
+                const index = products.findIndex(p => p.id === id);
+                products[index] = { id, name, description, price, image, stock };
+                alert('Product updated successfully!');
+            } else {
+                // Add new product
+                const product = { id: products.length + 1, name, description, price, image, stock };
+                products.push(product);
+                alert('Product added successfully!');
+            }
+
+            updateProductTable();
+            clearProductForm();
+        }
+
+        function updateProduct(id) {
+            const product = products.find(p => p.id === id);
+            document.getElementById('productId').value = product.id;
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productImage').value = product.image;
+            document.getElementById('productStock').value = product.stock;
+            document.getElementById('submitButton').textContent = 'Update Product';
+        }
+
+        function removeProduct(id) {
+            products = products.filter(p => p.id !== id);
+            updateProductTable();
+            alert('Product removed successfully!');
+        }
+
+        function clearProductForm() {
+            document.getElementById('productForm').reset();
+            document.getElementById('productId').value = '';
+            document.getElementById('submitButton').textContent = 'Add Product';
+        }
+
+        function updateProductTable() {
+            const tableBody = document.getElementById('productTable');
+            tableBody.innerHTML = '';
+            products.forEach(product => {
+                const isLowStock = product.stock < 10;
+                const row = `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.description}</td>
+                        <td>$${product.price.toFixed(2)}</td>
+                        <td>${product.stock}</td>
+                        <td class="${isLowStock ? 'low-stock' : ''}">${isLowStock ? 'Low Stock' : 'In Stock'}</td>
+                        <td>
+                            <button class="btn btn-warning btn-action" onclick="updateProduct(${product.id})">Edit</button>
+                            <button class="btn btn-danger btn-action" onclick="removeProduct(${product.id})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Order Management
+        function updateOrderStatus(orderId, status) {
+            const order = orders.find(o => o.id === orderId);
+            order.status = status;
+            updateOrderTable();
+            if (status === 'Shipped') {
+                sendOrderConfirmation(orderId);
+            } else if (status === 'Refunded') {
+                issueRefund(orderId);
+            }
+        }
+
+        function sendOrderConfirmation(orderId) {
+            alert(`Order confirmation sent for Order ${orderId}`);
+        }
+
+        function issueRefund(orderId) {
+            alert(`Refund issued for Order ${orderId}`);
+        }
+
+        function updateOrderTable() {
+            const tableBody = document.getElementById('orderTable');
+            tableBody.innerHTML = '';
+            orders.forEach(order => {
+                const row = `
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.customer}</td>
+                        <td>${order.products.join(', ')}</td>
+                        <td>$${order.total.toFixed(2)}</td>
+                        <td>${order.status}</td>
+                        <td>
+                            <select onchange="updateOrderStatus('${order.id}', this.value)">
+                                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                <option value="Refunded" ${order.status === 'Refunded' ? 'selected' : ''}>Refunded</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Initialize tables on page load
+        window.onload = function() {
+            updateProductTable();
+            updateOrderTable();
+            // Attach submit event listener to product form
+            document.getElementById('productForm').addEventListener('submit', addProduct);
+        };
+    </script>
+</body>
+</html>
