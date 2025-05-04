@@ -83,12 +83,13 @@
          <div class="container-fluid">
             <nav class="navbar navbar-light bg-light justify-content-between">
                <div id="mySidenav" class="sidenav">
-                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                   <a href="index.html">Home</a>
                   <a href="products.html">Products</a>
                   <a href="about.html">About</a>
                   <a href="client.html">Client</a>
                   <a href="contact.html">Contact</a>
+                  <a href="admin.html">Admin</a>
                </div>
                <span class="toggle_icon" onclick="openNav()"><img src="images/toggle-icon.png"></span>
                <a class="logo" href="index.html"><img src="images/logo.png"></a>
@@ -107,7 +108,6 @@
                        </li>
                         <li><a href="products.html"><img src="images/search-icon.png"></a></li>
                      </ul>
-                  </div>
                   </div>
                </form>
             </nav>
@@ -183,7 +183,6 @@
          <div class="container">
             <div class="row mb-4">
                <div class="col-sm-12 text-center">
-
                   <div class="row" id="productContainer">
                               <!-- Products will be injected here dynamically -->
                   </div>
@@ -213,66 +212,66 @@
          </div>
       </div>
       <!-- about section end -->
-           <!-- customer section start -->
-           <div class="customer_section layout_padding">
-            <div class="container">
-               <div class="row">
-                  <div class="col-sm-12">
-                     <h1 class="customer_taital">Customers Reviews and Ratings</h1>
-                  </div>
-               </div>
-               <div id="main_slider" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="client_section_2">
-                           <div class="client_main">
-                              <div class="client_left">
-                                 <div class="client_img"><img src="images/customer3.png"></div>
-                              </div>
-                              <div class="client_right">
-                                 <h3 class="name_text">Jonyro</h3>
-                                 <p class="dolor_text">🌟🌟🌟🌟🌟 (5/5) <br> The colors are super pigmented and buttery smooth. I especially love the shimmer shades—they make my eyes pop!</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="carousel-item">
-                        <div class="client_section_2">
-                           <div class="client_main">
-                              <div class="client_left">
-                                 <div class="client_img"><img src="images/customer1.png"></div>
-                              </div>
-                              <div class="client_right">
-                                 <h3 class="name_text">Yesly</h3>
-                                 <p class="dolor_text">🌟🌟🌟 (3/5) <br> The lipstick I ordered is gorgeous and feels really hydrating, but it took over 10 days to arrive. I was hoping for faster delivery</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="carousel-item">
-                        <div class="client_section_2">
-                           <div class="client_main">
-                              <div class="client_left">
-                                 <div class="client_img"><img src="images/customer2.png"></div>
-                              </div>
-                              <div class="client_right">
-                                 <h3 class="name_text">Jane</h3>
-                                 <p class="dolor_text">🌟🌟🌟🌟 (4/5) <br>The color payoff is amazing and blends so smoothly—seriously, it gives the prettiest natural flush! I just noticed it starts to fade after about 5–6 hours, so I have to touch it up if I’m out all day </p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-                  <i class="fa fa-angle-left"></i>
-                  </a>
-                  <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-                  <i class="fa fa-angle-right"></i>
-                  </a>
+      <!-- customer section start -->
+      <div class="customer_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h1 class="customer_taital">Customers Reviews and Ratings</h1>
                </div>
             </div>
+            <div id="main_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="images/customer3.png"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Jonyro</h3>
+                              <p class="dolor_text">🌟🌟🌟🌟🌟 (5/5) <br> The colors are super pigmented and buttery smooth. I especially love the shimmer shades—they make my eyes pop!</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="images/customer1.png"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Yesly</h3>
+                              <p class="dolor_text">🌟🌟🌟 (3/5) <br> The lipstick I ordered is gorgeous and feels really hydrating, but it took over 10 days to arrive. I was hoping for faster delivery</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="images/customer2.png"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Jane</h3>
+                              <p class="dolor_text">🌟🌟🌟🌟 (4/5) <br>The color payoff is amazing and blends so smoothly—seriously, it gives the prettiest natural flush! I just noticed it starts to fade after about 5–6 hours, so I have to touch it up if I’m out all day </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
          </div>
-         <!-- customer section end -->
+      </div>
+      <!-- customer section end -->
       <!-- contact section start -->
       <div class="contact_section layout_padding">
          <div class="container">
@@ -285,14 +284,14 @@
                <div class="col-md-6">
                   <div class="contact_main">
                      <div class="contact_bt"><a href="#">Contact Form</a></div>
-                     <div class="newletter_bt"><a href="#">Newletter</a></div>
+                     <div class="newletter_bt"><a href="#">Newloan</a></div>
                   </div>
                </div>
             </div>
          </div>
          <div class="map_main">
             <div class="map-responsive">
-               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
             </div>
          </div>
       </div>
@@ -386,9 +385,6 @@
          function closeNav() {
            document.getElementById("mySidenav").style.width = "0";
          }
-
-
- 
       </script> 
    </body>
 </html>
