@@ -51,6 +51,30 @@
    text-decoration: none;
    color: white;
 }
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-container img {
+    width: 30px;
+    height: 28px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: 12px;
+    right: 0px;
+    background-color: #4a4a4a;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+}
       </style>
    </head>
    <body>
@@ -74,9 +98,12 @@
                         <li><a href="login.html"><img src="images/user-icon.png"></a></li>
                         <!-- <li><a href="login.html" class="login_btn">Login</a></li> -->
                         <li>
-                           <a href="shoppingCart.html">
-                               <img src="images/bag-icon.png" alt="Shopping Cart">
-                           </a>
+                           <div class="cart-container">
+                              <a href="shoppingCart.html">
+                                  <img src="images/bag-icon.png" alt="Shopping Cart">
+                                  <div class="cart-badge" id="cartBadge">0</div>
+                              </a>
+                          </div>
                        </li>
                         <li><a href="products.html"><img src="images/search-icon.png"></a></li>
                      </ul>
@@ -359,6 +386,9 @@
          function closeNav() {
            document.getElementById("mySidenav").style.width = "0";
          }
+
+
+ 
       </script> 
    </body>
 </html>
