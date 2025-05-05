@@ -2,11 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db.config.js');
+
+const userRoute = require('./routes/user_route.js');
+
 const app = express();
 const PORT = 3000;
 
+connectDB();
+
 app.use(cors()); // Allow frontend access
 app.use(bodyParser.json()); // Parse JSON bodies
+
+
+app.use('/api/users', userRoute); //test purpose
 
 // Sample in-memory "database"
 let products = [
