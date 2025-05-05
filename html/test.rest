@@ -1,0 +1,55 @@
+### Get all users
+GET http://localhost:3000/api/users
+
+### Create new user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "username": "lina",
+    "email": "lina@example.com",
+    "password": "password12"
+}
+###delete user
+DELETE http://localhost:3000/api/users/681917431265ec280987e694
+
+### Add product to cart
+POST http://localhost:3000/api/carts/add
+Content-Type: application/json
+
+{ "user" : "6819161b1265ec280987e691",
+  "productId": "68192a3c8cf302d230355342",
+   "quantity": 2
+}
+### add product
+POST http://localhost:3000/api/productCreate
+Content-Type: application/json
+
+{
+  "name": "Wireless Mouse",
+  "description": "A compact and responsive wireless mouse",
+  "price": 25.99,
+  "category": "Electronics",
+  "stock": 100,
+  "images": [
+    "https://example.com/images/mouse1.jpg"
+  ]
+}
+###
+POST http://localhost:3000/api/productCreate
+Content-Type: application/json
+
+{
+  "name": "Yoga Mat",
+  "description": "Non-slip, eco-friendly yoga mat for fitness and meditation",
+  "price": 45.5,
+  "category": "Fitness",
+  "stock": 50,
+  "images": [
+    "https://example.com/images/yogamat1.jpg",
+    "https://example.com/images/yogamat2.jpg"
+  ]
+}
+
+###
+GET http://localhost:3000/api/cart/681924c48cf302d23035533f
