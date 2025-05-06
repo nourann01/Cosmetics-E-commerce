@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 app.use('/api', userRoutes); //test purpose
 app.use('/api', productRoutes); //test purpose
 app.use('/api/cart', cartRoutes); //test purpose
-app.use('/api/cart', CheckoutRoutes); 
+app.use('/api', CheckoutRoutes); 
 
 
 // // Sample in-memory "database"
