@@ -9,6 +9,8 @@ const connectDB = require('./config/db.config.js');
 const userRoutes = require('./routes/user_route.js');
 const productRoutes = require('./routes/productRoute.js');
 const cartRoutes = require('./routes/cart_route.js'); 
+const CheckoutRoutes = require('./routes/checkout_route.js'); 
+
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +27,8 @@ app.get('/', (req, res) => {
 app.use('/api', userRoutes); //test purpose
 app.use('/api', productRoutes); //test purpose
 app.use('/api/cart', cartRoutes); //test purpose
+app.use('/api/cart', CheckoutRoutes); 
+
 
 // // Sample in-memory "database"
 // let products = [
