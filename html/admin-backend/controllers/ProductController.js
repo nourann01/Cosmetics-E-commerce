@@ -71,3 +71,34 @@ exports.deleteProduct = async (req, res) => {
     res.status(400).json({ error: 'Invalid ID format' });
   }
 };
+
+//6. filter products
+exports.filterProducts = async (req, res) => {
+  try {
+    const { category, priceRange, searchQuery } = req.query;
+    let filter = {};
+
+    if (category && category !== "all") {
+      filter.category = category;
+    }
+
+    if (priceRange) {
+      const [minPrice, maxPrice] = priceRange.split('-').map(Number);
+      filter.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    if (searchQuery) {
+      const regex = new RegExp(searchQuery, 'i');
+      filter.$or = [
+        { name: { $regex: regex } },
+        { description: { $regex: regex } }
+      ];
+    }
+
+    const products = await Product.find(filter);
+    res.status(200).json({ success: true, products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
