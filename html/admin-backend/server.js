@@ -13,12 +13,12 @@ const app = express();
 const PORT = 3000;
 dotenv.config();
 connectDB();
-
+app.use(cookieParser());
 app.use(cors({
-  origin: 'http://127.0.0.1:5500',
+  origin: ['http://localhost:5500'],
   credentials: true
 })); // Allow frontend access
-app.use(cookieParser());
+
 //app.use(bodyParser.json()); // Parse JSON bodies
 app.use(express.json());
 app.get('/', (req, res) => {

@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
 
     const token = createToken(newUser);
     res
-      .cookie('token', token, { httpOnly: true })
+      .cookie('token', token, { httpOnly: false })
       .status(201)
       .json({ msg: 'Registered successfully' });
   } catch (err) {
@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
 
     // Set the token in cookies and send success response
     console.log("Sending response: ", { msg: 'Logged in successfully', isAdmin: user.isAdmin });
-    res.cookie('token', token, { httpOnly: true, secure: false, sameSite: 'lax' }).json({ msg: 'Logged in successfully', isAdmin: user.isAdmin });
+    res.cookie('token', token, { httpOnly: false, secure: false, sameSite: 'lax' }).json({ msg: 'Logged in successfully', isAdmin: user.isAdmin });
   } catch (err) {
     console.error('Error in login:', err.message);  // Log any errors that occur
     res.status(500).json({ error: err.message });
@@ -69,5 +69,5 @@ exports.login = async (req, res) => {
 
 // Logout
 exports.logout = (req, res) => {
-  res.clearCookie('token').json({ msg: 'Logged out successfully' });
+  res.clearCookie('token', {path:'/',sameSite:'lax', secure: false}).json({ msg: 'Logged out successfully' });
 };

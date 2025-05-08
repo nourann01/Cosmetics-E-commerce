@@ -281,8 +281,8 @@
                     <div class="user-avatar">
                         <img src="" alt="">
                     </div>
-                    <h3 class="user-name">Jessica Roberts</h3>
-                    <p class="user-email">jessica.roberts@example.com</p>
+                    <h3 id= "username" class="user-name">Jessica Roberts</h3>
+                    <p id='email' class="user-email">jessica.roberts@example.com</p>
                     <button class="edit-profile-btn">Edit Profile</button>
                     <button id="logoutButton" class="edit-profile-btn">Logout</button>
                 </div>
@@ -303,13 +303,13 @@
                     
                     <div class="info-row">
                         <div class="info-label">Full Name</div>
-                        <div class="info-value">Jessica Roberts</div>
+                        <div class="info-value" id="username">name</div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">Email</div>
-                        <div class="info-value">jessica.roberts@example.com</div>
+                        <div class="info-value" id="email">name@example.com</div>
                     </div>
-                    <div class="info-row">
+                    <!-- <div class="info-row">
                         <div class="info-label">Phone</div>
                         <div class="info-value">(555) 123-4567</div>
                     </div>
@@ -320,7 +320,7 @@
                     <div class="info-row">
                         <div class="info-label">Member Since</div>
                         <div class="info-value">January 2023</div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="profile-section">
@@ -361,6 +361,50 @@
         // If not logged in, redirect to login page
         window.location.href = "login.html";
         }
+        //profileInfo
+        document.addEventListener('DOMContentLoaded', function() {
+        // Function to decode JWT and get the user ID
+        function getUserIdFromToken() {
+          const token = localStorage.getItem('token');  // Or use sessionStorage, depending on where you store your JWT token
+          if (!token) {
+            throw new Error('No token found');
+            }
+            const parts = token.split('.');
+          if (parts.length !== 3) {
+            throw new Error('Invalid token structure');
+            }
+
+          const payload = parts[1];
+          const decodedPayload = JSON.parse(atob(payload)); // decode Base64URL part
+          return decodedPayload.id;
+        }
+
+        // Function to fetch user profile data
+        async function fetchUserProfile() {
+  try {
+    const response = await fetch('http://localhost:3000/api/profile', {
+      method: 'GET',
+      credentials: 'include', // This sends cookies
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch user profile');
+    }
+
+    const user = await response.json();
+
+    // Update DOM elements
+    document.getElementById('username').textContent = user.username;
+    document.getElementById('email').textContent = user.email;
+  } catch (err) {
+    console.error('Error fetching user profile:', err);
+  }
+}
+
+        fetchUserProfile();
+      });
+
+      //logout
         document.getElementById("logoutButton").addEventListener("click", async function () {
         // Clear token from localStorage
         localStorage.removeItem("token");

@@ -18,8 +18,13 @@ exports.requireAuth = async (req, res, next) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    if (!user.isAdmin) {
-      return res.status(403).json({ error: "Access denied: Admins only" });
+    if (user.isAdmin) {
+      req.user = user;
+      return next();
+    }
+
+    if (req.params.id && req.params.id !== user._id.toString()) {
+      return res.status(403).json({ error: "Access denied: You can only access your own data" });
     }
 
     req.user = user;

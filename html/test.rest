@@ -108,3 +108,5 @@ GET http://localhost:3000/api/products
 GET http://localhost:3000/api/products/filter?searchQuery=cream
 ###
 GET http://localhost:3000/api/products/filter?category=Makeup&priceRange=20-40&searchQuery=lipstick
+###
+GET http://localhost:3000/api/profile
