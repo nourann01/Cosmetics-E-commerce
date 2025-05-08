@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Glow Up Beauty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #fdf8f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navbar Styles */
+        .header_section {
+            width: 100%;
+            background-color: white;
+            height: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+        }
+        
+        .toggle_icon {
+            font-size: 25px;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #e08f8f;
+            text-decoration: none;
+        }
+        
+        .login_text ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .login_text a {
+            color: #333;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        
+        /* Profile Content Styles */
+        .profile-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .user-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid #e08f8f;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .user-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .edit-profile-btn {
+            background-color: #e08f8f;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .edit-profile-btn:hover {
+            background-color: #d67e7e;
+        }
+        
+        .profile-menu {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .menu-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item.active {
+            background-color: #fff9f9;
+            border-left: 4px solid #e08f8f;
+        }
+        
+        .menu-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .content-area {
+            flex: 3;
+        }
+        
+        .profile-section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            flex: 1;
+            font-weight: 500;
+            color: #777;
+        }
+        
+        .info-value {
+            flex: 2;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                max-width: 100%;
+            }
+            
+            .navbar {
+                padding: 15px 10px;
+            }
+            
+            .login_text ul {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="index.html">Home</a>
+                    <a href="products.html">Products</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <span class="toggle_icon" onclick="openNav()">☰</span>
+                <a class="logo" href="index.html">BEAUTIFLIE</a>
+                <div class="login_text">
+                    <ul>
+                        <li><a href="profile.html"><img src="images/user-icon.png"></a></a></li>
+                        <li><a href="shoppingCart.html"><img src="images/bag-icon.png" alt="Shopping Cart"></a></li>
+                        <li><a href="products.html"><img src="images/search-icon.png"></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Profile Content -->
+    <div class="container">
+        <div class="profile-container">
+            <div class="sidebar">
+                <div class="user-card">
+                    <div class="user-avatar">
+                        <img src="" alt="">
+                    </div>
+                    <h3 class="user-name">Jessica Roberts</h3>
+                    <p class="user-email">jessica.roberts@example.com</p>
+                    <button class="edit-profile-btn">Edit Profile</button>
+                    <button id="logoutButton" class="edit-profile-btn">Logout</button>
+                </div>
+                
+                <div class="profile-menu">
+                    <div class="menu-item active">Account Information</div>
+                    <div class="menu-item">My Orders</div>
+                    <div class="menu-item">Wishlist</div>
+                    <div class="menu-item">Address Book</div>
+                    <div class="menu-item">Payment Methods</div>
+                    <div class="menu-item">Settings</div>
+                </div>
+            </div>
+            
+            <div class="content-area">
+                <div class="profile-section">
+                    <h2 class="section-title">Account Information</h2>
+                    
+                    <div class="info-row">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">Jessica Roberts</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">jessica.roberts@example.com</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">(555) 123-4567</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Date of Birth</div>
+                        <div class="info-value">April 15, 1990</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Member Since</div>
+                        <div class="info-value">January 2023</div>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <h2 class="section-title">Recent Orders</h2>
+                    
+                    <div class="info-row">
+                        <div class="info-label">Last Order</div>
+                        <div class="info-value">#ORD-7891 (May 2, 2025)</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Status</div>
+                        <div class="info-value">Delivered</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Total</div>
+                        <div class="info-value">$78.95</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Items</div>
+                        <div class="info-value">
+                            Hydrating Serum, Matte Lipstick (3 colors), Foundation Brush
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+        if (!localStorage.getItem("token")) {
+        // If not logged in, redirect to login page
+        window.location.href = "login.html";
+        }
+        document.getElementById("logoutButton").addEventListener("click", async function () {
+        // Clear token from localStorage
+        localStorage.removeItem("token");
+
+        // Optionally, make a logout request to the backend to clear session cookies
+        try {
+            const response = await fetch("http://localhost:3000/api/auth/logout", {
+                method: "POST",
+                credentials: "same-origin", // to send cookies along with the request
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.msg || "Successfully logged out");
+            } else {
+                alert("Failed to log out");
+            }
+
+            // Redirect to login page after successful logout
+            window.location.href = "login.html";
+        } catch (error) {
+            console.error("Error logging out:", error);
+            alert("Logout failed. Please try again.");
+        }
+    });
+
+        // Tab switching functionality
+        // document.querySelectorAll('.menu-item').forEach(item => {
+        //     item.addEventListener('click', function() {
+        //         // Remove active class from all items
+        //         document.querySelectorAll('.menu-item').forEach(i => {
+        //             i.classList.remove('active');
+        //         });
+                
+        //         // Add active class to clicked item
+        //         this.classList.add('active');
+                
+        //         // Here you would typically load different content based on the tab
+        //         // For this example, we're just changing the active state
+        //     });
+        // });
+    </script>
+</body>
+</html>

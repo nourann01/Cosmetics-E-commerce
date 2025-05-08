@@ -51,7 +51,7 @@
                <form class="form-inline ">
                   <div class="login_text">
                      <ul>
-                        <li><a href="#"><img src="images/user-icon.png"></a></li>
+                        <li><a id="profileLink" href="#"><img src="images/user-icon.png"></a></li>
                         <li><a href="#"><img src="images/bag-icon.png"></a></li>
                         <li><a href="#"><img src="images/search-icon.png"></a></li>
                      </ul>
@@ -208,6 +208,13 @@
          function closeNav() {
            document.getElementById("mySidenav").style.width = "0";
          }
+         const token = localStorage.getItem("token");
+
+         if (token) {
+          const profileLink = document.getElementById("profileLink");
+         if (profileLink) {
+         profileLink.href = "profile.html";
+         }}
       </script> 
    </body>
 </html>

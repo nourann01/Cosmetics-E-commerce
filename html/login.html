@@ -281,14 +281,39 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  
+
   <script>
-    function openNav() {
-      document.getElementById("mySidenav").style.width = "100%";
-    }
+      //   function openNav() {
+  //     document.getElementById("mySidenav").style.width = "100%";
+  //   }
     
-    function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-    }
+  //   function closeNav() {
+  //     document.getElementById("mySidenav").style.width = "0";
+  //   }
+  // function openNav() {
+  //   document.getElementById("mySidenav").style.width = "100%";
+  // }
+
+  // function closeNav() {
+  //   document.getElementById("mySidenav").style.width = "0";
+  // }
+
+  // document.getElementById('loginForm').addEventListener('submit', function(e) {
+  //   e.preventDefault();
+  //   const email = document.getElementById('email').value;
+  //   const password = document.getElementById('password').value;
+
+  //   // Replace with real authentication in production
+  //   if (email === 'admin@com' && password === 'password123') {
+  //     localStorage.setItem('isAdmin', 'true');
+  //     localStorage.setItem('adminEmail', email);
+  //     alert('Login successful!');
+  //     window.location.href = 'admin.html';
+  //   } else {
+  //     alert('Invalid email or password.');
+  //   }
+  // });
   function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
   }
@@ -297,21 +322,46 @@
     document.getElementById("mySidenav").style.width = "0";
   }
 
-  document.getElementById('loginForm').addEventListener('submit', function(e) {
+  document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Replace with real authentication in production
-    if (email === 'admin@com' && password === 'password123') {
-      localStorage.setItem('isAdmin', 'true');
-      localStorage.setItem('adminEmail', email);
-      alert('Login successful!');
-      window.location.href = 'admin.html';
-    } else {
-      alert('Invalid email or password.');
+    // Send login request to backend
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include', // Include credentials (cookies) with the request
+      });
+
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        alert('Login successful!');
+        localStorage.setItem("token", "logged-in"); //for the profile icon to be check whether its logged in or not
+        // Check if the user is an admin or not
+        if (data.isAdmin === true) {
+          // Redirect to admin page if isAdmin is true
+          window.location.href = 'admin.html';
+        } else {
+          // Redirect to user home page if isAdmin is false
+          window.location.href = 'index.html';
+        }
+      } else {
+        alert(data.msg || 'Invalid credentials.');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('Login failed. Please try again.');
     }
-  });
+});
+
+
+
   </script> 
 </body>
 </html>

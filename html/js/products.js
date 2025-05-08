@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     let allProducts = [];
     async function loadProductsFromAPI() {
         try {
-          const res = await fetch('http://localhost:3000/api/product_get_all');
+          const res = await fetch('http://localhost:3000/api/products', {
+            credentials: 'include' // <-- REQUIRED to send cookies
+          });
           const data = await res.json();
           renderProducts(data|| []);
         } catch (err) {
@@ -57,17 +59,19 @@ filterButton.addEventListener("click", async function () {
     if (priceRange && priceRange !== "all") queryParams.append("priceRange", priceRange);
     if (searchQuery) queryParams.append("searchQuery", searchQuery);
 
-    const url = `http://localhost:3000/api/filter?${queryParams.toString()}`;
+    const url = `http://localhost:3000/api/products/filter?${queryParams.toString()}`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          credentials: 'include' // <-- REQUIRED to send cookies
+        });
         const data = await response.json();
 
-        if (data.success) {
-            renderProducts(data.products);
-        } else {
-            container.innerHTML = "<p>No products found.</p>";
-        }
+        if (Array.isArray(data.products) && data.products.length > 0) {
+          renderProducts(data.products);
+      } else {
+          container.innerHTML = "<p>No products found.</p>";
+      }
     } catch (error) {
         console.error("Error fetching filtered products:", error);
         container.innerHTML = "<p>Failed to load products.</p>";
@@ -91,17 +95,19 @@ searchForm.addEventListener("submit", async function(event) {
   if (priceRange && priceRange !== "all") queryParams.append("priceRange", priceRange);
   if (searchQuery) queryParams.append("searchQuery", searchQuery);
 
-  const url = `http://localhost:3000/api/filter?${queryParams.toString()}`;
+  const url = `http://localhost:3000/api/products/filter?${queryParams.toString()}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      credentials: 'include' // <-- REQUIRED to send cookies
+    });
     const data = await response.json();
 
-    if (data.success) {
+    if (Array.isArray(data.products) && data.products.length > 0) {
       renderProducts(data.products);
-    } else {
+  } else {
       container.innerHTML = "<p>No products found matching your search.</p>";
-    }
+  }
   } catch (error) {
     console.error("Error fetching filtered products:", error);
     container.innerHTML = "<p>Failed to load products.</p>";

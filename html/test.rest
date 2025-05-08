@@ -59,4 +59,52 @@ GET http://localhost:3000/api/product_get_all
 GET http://localhost:3000/api/filter?category=Makeup&priceRange=10-50
 
 
+### register a user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
 
+{
+  "username": "malak",
+  "email": "malak@example.com",
+  "password": "password123"
+}
+
+### register a user
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "nouran@example.com",
+  "password": "password123"
+}
+
+### logout
+POST http://localhost:3000/api/auth/logout
+
+###register a wrong admin
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "nouran@example.com",
+  "password": "password123",
+  "isAdmin": true
+}
+
+###register an admin
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "farah",
+  "email": "farah@example.com",
+  "password": "password1234567",
+  "isAdmin": true
+}
+
+### getProducts
+GET http://localhost:3000/api/products
+###
+GET http://localhost:3000/api/products/filter?searchQuery=cream
+###
+GET http://localhost:3000/api/products/filter?category=Makeup&priceRange=20-40&searchQuery=lipstick

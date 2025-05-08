@@ -1,12 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/user_controller');
 
-router.get('/users', userController.getUsers);
-router.post('/users', userController.createUser);
-router.get('/users/:id', userController.getUser);
-router.put('/users/:id', userController.updateUser);
-router.delete('/users/:id', userController.deleteUser);
+const cartController = require('../controllers/cart_controller');
+const orderController = require('../controllers/checkout_controller');
+const productController = require('../controllers/ProductController');
+
+
+// ----- Cart Routes (User Only) -----
+router.get('/cart/get/:id', cartController.getCart);
+router.post('/cart/add', cartController.addToCart);
+router.put('/cart/update', cartController.updateCartItem);
+router.delete('/cart/remove/:productId', cartController.removeFromCart);
+router.delete('/cart/clear', cartController.clearCart);
+
+// ----- Checkout Routes (User Only) -----
+router.post('/checkout', orderController.createOrder);
+
+router.get('/products/filter', productController.filterProducts);
+router.get('/products', productController.getAllProducts);
+router.get('/products/:id', productController.getProductById);
+
 
 
 module.exports = router;
